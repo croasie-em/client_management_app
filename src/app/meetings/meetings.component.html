@@ -1,0 +1,67 @@
+
+<div class="container">
+    <h2>Meetings</h2>
+  
+    <!-- Search meetings by meeting title -->
+    <div class="form-group">
+      <label for="search">Search by Meeting Title</label>
+      <input id="search" type="text" [(ngModel)]="searchMeetings" class="form-control" placeholder="Search Meetings by Meeting Title" />
+    </div>
+  
+    <!-- List of Filtered meetings -->
+    <div *ngIf="filteredMeetings.length > 0">
+      <h3>Meetings:</h3>
+      <ul class="list-group">
+        <li *ngFor="let meetings of filteredMeetings" class="list-group-item">
+          <strong>{{ meetings.meeting_title }} {{ meetings.meeting_date }}</strong> ({{ meetings.meeting_time}}) - {{ meetings.number_of_ppl }}<br>
+          
+        </li>
+      </ul>
+    </div>
+    <div *ngIf="filteredMeetings.length === 0 && searchMeetings !== ''">
+      <p>No meetings found matching meeting name.</p>
+    </div>
+  
+    <!-- Toggle Button -->
+    <button (click)="toggleForm()" class="btn btn-primary">
+      {{ isFormVisible ? 'Cancel' : 'Add Meeting' }}
+    </button>
+  
+    <!-- Add meeting Form (only visible when isFormVisible is true) -->
+    <form *ngIf="isFormVisible" [formGroup]="meetingForm" (ngSubmit)="onSubmit()">
+      <div class="form-group">
+        <label for="meeting_title">Meeting Title:</label>
+        <input id="meeting_name" formControlName="meeting_name" type="text" class="form-control" />
+        <div *ngIf="meetingForm.get('meeting_title')?.invalid && meetingForm.get('meeting_title')?.touched" class="text-danger">
+          Meeting Title is required.
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label for="meeting_date">Meeting Date:</label>
+        <input id="meeting_date" formControlName="meeting_date" type="text" class="form-control" />
+        <div *ngIf="meetingForm.get('meeting_date')?.invalid && meetingForm.get('meeting_date')?.touched" class="text-danger">
+          Date of Meeting is required.
+        </div>
+      </div>
+      <div class="form-group">
+        <label for="meeting_time">Meeting Time:</label>
+        <input id="meeting_time" formControlName="meeting_time" type="text" class="form-control" />
+        <div *ngIf="meetingForm.get('meeting_time')?.invalid && meetingForm.get('meeting_time')?.touched" class="text-danger">
+          Meeting Time is required.
+        </div>
+      </div>
+      <div class="form-group">
+        <label for="number_of_ppl">Number of People:</label>
+        <input id="number_of_ppl" formControlName="number_of_ppl" type="text" class="form-control" />
+        <div *ngIf="meetingForm.get('number_of_ppl')?.invalid && meetingForm.get('number_of_ppl')?.touched" class="text-danger">
+          Number of people attending is required.
+        </div>
+      </div>
+
+  
+
+  
+      <button type="submit" class="btn btn-primary" [disabled]="meetingForm.invalid">Add Meeting</button>
+    </form>
+  </div>

@@ -1,0 +1,30 @@
+.container {
+    max-width: 600px;
+    margin: 50px auto;
+  }
+  
+  h2 {
+    text-align: center;
+    margin-bottom: 20px;
+  }
+  
+  .form-group {
+    margin-bottom: 15px;
+  }
+  
+  input.form-control {
+    width: 100%;
+    padding: 10px;
+    margin-top: 5px;
+  }
+  
+  button.btn {
+    width: 100%;
+    padding: 10px;
+    font-size: 16px;
+  }
+  
+  .text-danger {
+    font-size: 12px;
+    color: red;
+  }

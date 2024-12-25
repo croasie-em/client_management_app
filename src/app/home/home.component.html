@@ -1,0 +1,16 @@
+<div class="home">
+    <h2>Welcome, Please Log In Below</h2>
+    <h5>You will not be able to access any of the pages until logging in</h5>
+
+    <div *ngIf="message" class="alert alert-warning">
+      {{ message }}
+    </div>
+    
+    <app-login></app-login> 
+    
+  </div>
+
+  <div class="mb-3">
+    <button class="logout-btn" (click)="logout()">Log Out</button>
+  </div>
+  

@@ -1,0 +1,40 @@
+
+
+.home {
+    padding: 20px;  
+    max-width: 800px; 
+    margin: 0 auto;  
+    text-align: center; 
+  }
+  
+  /* Style for the logout button container */
+  .logout-container {
+    margin-top: 20px; /* Adds space between the content and the logout button */
+    text-align: center; /* Ensures the logout button is centered */
+  }
+.logout-btn {
+    display: block;      
+    margin-top: 20px;    
+    padding: 10px 20px;  
+    font-size: 16px;     
+    background-color: #007bff; 
+    color: white;        
+    border: none;        
+    border-radius: 5px;  
+    cursor: pointer;    
+    transition: background-color 0.3s; 
+  }
+  
+  /* hover effect */
+  .logout-btn:hover {
+    background-color: #0056b3; 
+  }
+
+  .alert-warning {
+    color: #856404;
+    background-color: #fff3cd;
+    border: 1px solid #ffeeba;
+    padding: 10px;
+    border-radius: 5px;
+    margin-bottom: 15px;
+  }

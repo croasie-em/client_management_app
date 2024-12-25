@@ -1,0 +1,65 @@
+<div class="container">
+    <h2>Projects</h2>
+  
+    <!-- Search projects by project area -->
+    <div class="form-group">
+      <label for="search">Search by Project Area:</label>
+      <input id="search" type="text" [(ngModel)]="searchProjects" class="form-control" placeholder="Search Projects by Project Area" />
+    </div>
+  
+    <!-- List of Filtered projects -->
+    <div *ngIf="filteredProjects.length > 0">
+      <h3>Projects:</h3>
+      <ul class="list-group">
+        <li *ngFor="let projects of filteredProjects" class="list-group-item">
+          <strong>{{ projects.project_name }} {{ projects.project_area }}</strong> ({{ projects.start_date}}) - {{ projects.end_date }}<br>
+          
+        </li>
+      </ul>
+    </div>
+    <div *ngIf="filteredProjects.length === 0 && searchProjects !== ''">
+      <p>No projects found matching project area.</p>
+    </div>
+  
+    <!-- Toggle Button -->
+    <button (click)="toggleForm()" class="btn btn-primary">
+      {{ isFormVisible ? 'Cancel' : 'Add Project' }}
+    </button>
+  
+    <!-- Add project Form (only visible when isFormVisible is true) -->
+    <form *ngIf="isFormVisible" [formGroup]="projectForm" (ngSubmit)="onSubmit()">
+      <div class="form-group">
+        <label for="project_name">Project Name:</label>
+        <input id="project_name" formControlName="project_name" type="text" class="form-control" />
+        <div *ngIf="projectForm.get('project_name')?.invalid && projectForm.get('project_name')?.touched" class="text-danger">
+          Project Name is required.
+        </div>
+      </div>
+      <div class="form-group">
+        <label for="project_area">Project Area:</label>
+        <input id="project_area" formControlName="project_area" type="text" class="form-control" />
+        <div *ngIf="projectForm.get('project_area')?.invalid && projectForm.get('project_area')?.touched" class="text-danger">
+          Project Area is required.
+        </div>
+      </div>
+      <div class="form-group">
+        <label for="start_date">Start Date:</label>
+        <mat-form-field appearance="fill">
+          <input matInput [matDatepicker]="picker" formControlName="start_date" id="start_date" placeholder="Enter a start date">
+          <mat-datepicker #picker></mat-datepicker>
+        </mat-form-field>
+      </div>
+  
+      <div class="form-group">
+        <label for="end_date">End Date:</label>
+        <mat-form-field appearance="fill">
+          <input matInput [matDatepicker]="picker" formControlName="end_date" id="end_date" placeholder="Enter an end date">
+          <mat-datepicker #picker></mat-datepicker>
+        </mat-form-field>
+      </div>
+  
+
+  
+      <button type="submit" class="btn btn-primary" [disabled]="projectForm.invalid">Add Project</button>
+    </form>
+  </div>

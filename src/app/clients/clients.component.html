@@ -1,0 +1,92 @@
+<div class="container">
+    <h2>Clients</h2>
+  
+    <!-- Search Clients by company -->
+    <div class="form-group">
+      <label for="search">Search by Company:</label>
+      <input id="search" type="text" [(ngModel)]="searchClient" class="form-control" placeholder="Search clients by company" />
+    </div>
+  
+    <!-- List of Filtered Clients -->
+    <div *ngIf="filteredClients.length > 0">
+      <h3>Clients List:</h3>
+      <ul class="list-group">
+        <li *ngFor="let client of filteredClients" class="list-group-item">
+          <strong>{{ client.first_name }} {{ client.last_name }}</strong> ({{ client.company }}) - {{ client.email }}<br>
+          {{ client.add_line }}, {{ client.city }}, {{ client.post_code }}
+        </li>
+      </ul>
+    </div>
+    <div *ngIf="filteredClients.length === 0 && searchClient !== ''">
+      <p>No clients found matching the company name.</p>
+    </div>
+  
+    <!-- Toggle Button (Move below the client list and search section) -->
+    <button (click)="toggleForm()" class="btn btn-primary">
+      {{ isFormVisible ? 'Cancel' : 'Add Client' }}
+    </button>
+  
+    <!-- Client Form (only visible when isFormVisible is true) -->
+    <form *ngIf="isFormVisible" [formGroup]="clientForm" (ngSubmit)="onSubmit()">
+      <div class="form-group">
+        <label for="first_name">First Name:</label>
+        <input id="first_name" formControlName="first_name" type="text" class="form-control" />
+        <div *ngIf="clientForm.get('first_name')?.invalid && clientForm.get('first_name')?.touched" class="text-danger">
+          First Name is required.
+        </div>
+      </div>
+      <div class="form-group">
+        <label for="last_name">Last Name:</label>
+        <input id="last_name" formControlName="last_name" type="text" class="form-control" />
+        <div *ngIf="clientForm.get('last_name')?.invalid && clientForm.get('last_name')?.touched" class="text-danger">
+          Last Name is required.
+        </div>
+      </div>
+      <div class="form-group">
+        <label for="company">Company:</label>
+        <input id="company" formControlName="company" type="text" class="form-control" />
+        <div *ngIf="clientForm.get('company')?.invalid && clientForm.get('company')?.touched" class="text-danger">
+          Company is required.
+        </div>
+      </div>
+  
+      <div class="form-group">
+        <label for="email">Email:</label>
+        <input id="email" formControlName="email" type="email" class="form-control" />
+        <div *ngIf="clientForm.get('email')?.invalid && clientForm.get('email')?.touched" class="text-danger">
+          Valid email is required.
+        </div>
+      </div>
+  
+      <div class="form-group">
+        <label for="add_line">1st Line of Address:</label>
+        <input id="add_line" formControlName="add_line" type="text" class="form-control" />
+        <div *ngIf="clientForm.get('add_line')?.invalid && clientForm.get('add_line')?.touched" class="text-danger">
+          1st Line of address is required.
+        </div>
+      </div>
+  
+      <div class="form-group">
+        <label for="city">City:</label>
+        <input id="city" formControlName="city" type="text" class="form-control" />
+        <div *ngIf="clientForm.get('city')?.invalid && clientForm.get('city')?.touched" class="text-danger">
+          City is required.
+        </div>
+      </div>
+  
+      <div class="form-group">
+        <label for="post_code">Post Code:</label>
+        <input id="post_code" formControlName="post_code" type="text" class="form-control" />
+        <div *ngIf="clientForm.get('post_code')?.invalid && clientForm.get('post_code')?.touched" class="text-danger">
+          Post Code is required.
+        </div>
+      </div>
+  
+      <button type="submit" class="btn btn-primary" [disabled]="clientForm.invalid">Add Client</button>
+    </form>
+  </div>
+  
+  
+  
+  
+  
